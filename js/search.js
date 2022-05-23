@@ -1,33 +1,40 @@
 function searchMechs() {
-    alert("Mechs are being searched")
+    // alert("Mechs are being searched")
 
+    loadMechs();
 }
 
 async function loadMechs() {
-    const id = document.getElementById("mechinput").value
-    const url = `http://localhost:5000//mech`
+    let url = new URL(`http://localhost:5000/mech`);
 
-    const httpResponse = await fetch(url)
+    onlyAvailable = document.getElementById('onlyAvailable');
+
+    if (onlyAvailable.checked) {
+        url.searchParams.append("onlyAvailable", true);
+    }
+
+    searchTerm = document.getElementById('searchInput').value;
+
+    if (searchTerm) {
+        url.searchParams.append("searchTerm", searchTerm);
+    }
+
+    console.log(url.toString());
+
+    const httpResponse = await fetch(url.toString())
     const body = await httpResponse.json()
 
     
     console.log(body)
-//   let supervise = [
-//   {m_id=0, make="", model="", year="False", color="", max_speed=0, weight=0, height=0, des="",
-// cp=0, pc=0, ava=False, con=False}
-//  ]
     
- let tableElement = document.getElementById("myTBody")
-        tableElement.innerHTML = "";
+    let tableElement = document.getElementById("mechTableBody")
+    tableElement.innerHTML = "";
 
+    body.forEach(mech => {
+        //Create a new tr and put it into my tbody ("table")
+        let mechRow = document.createElement("tr")
+        tableElement.appendChild(mechRow)
 
-        body.forEach(mech => {
-    //Create a new tr and put it into my tbody ("table")
-    let mechRow = document.createElement("tr")
-    tableElement.appendChild(mechRow)
-
-    
-   
         let Data = document.createElement("td")
         Data.innerHTML = mech.m_id
         mechRow.appendChild(Data);
@@ -83,9 +90,5 @@ async function loadMechs() {
         let Data14 = document.createElement("td")
         Data14.innerHTML = mech.confidential
         mechRow.appendChild(Data14);
-
-        
-        
-
+    });
 }
-)}
