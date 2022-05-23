@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Mech Management</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark bd-gutter px-5">
+            <div class="container-fluid">
+                <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link active">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="mechs.html" class="nav-link">Mechs</a>
+                        </li>
+                        <!-- TODO: have this <li> only appear if user is admin -->
+                        <li class="nav-item">
+                            <!-- TODO: set href to mech registration page -->
+                            <a href="#" class="nav-link">Register Mech</a>
+                        </li>
+                    </ul>
+                    <div class="d-flex">
+                        <a href="login.html" class="btn btn-primary">Login</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <header class="mb-5">
+            <div class="container">
+                <h1>Mech Management</h1>
+            </div>
+        </header>
+        <main>
+            <div class="container">
+                <!-- RECENT MECHS SHOULD APPEAR HERE -->
+                <!-- TODO: use bootstrap cards to display the mechs that appear on the home page -->
+
+                <div class="row row-cols-4">
+
+                    <!-- Template to show how the mechs will be rendered on the page -->
+                    <!-- <div class="col text-center">
+                        <div class="card mb-3">
+                            <img src="https://image.shutterstock.com/image-illustration/combat-mech-tall-pose-3d-600w-2047017245.jpg" alt="" class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="card-title">Mech Name</h5>
+                                <p class="card-text">Mech Description goes here and will probably be quite a bit longer than the mech name</p>
+                                <a href="#" class="btn btn-primary text-center">View Info</a>
+                            </div>
+                        </div>
+                    </div> -->
+
+                </div>
+            </div>
+        </main>
+        
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>        
+</html>
