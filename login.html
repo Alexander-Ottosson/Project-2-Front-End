@@ -53,33 +53,8 @@
 <!-- BOOTSTRAP SCRIPTS -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
-<!-- Javacript -->
-<script>
-    async function login() {
-        let username = document.getElementById('usernameInput').value;
-        let password = document.getElementById('passwordInput').value;
-        const data = {
-            "username": username,
-            "password": password
-        }
-        const url = 'http://localhost:5000/login'
-        const httpResponse = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-        const body = await httpResponse.json()
-        if (body['status'] = 200) {
-            console.log('Successfully Logged In')
-            location.href='view_requests.html'
-        } else if (body['status'] = 403) {
-            alert('Invalid Username or Password')
-        } else {
-            alert('Unable to Log In')
-        }
-    };
-</script>        
+
+<!-- EXTERNAL Javacript -->
+<script src="js/login.js"></script>        
 
 </html>
