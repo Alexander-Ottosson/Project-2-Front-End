@@ -16,7 +16,7 @@ async function login() {
     const body = await httpResponse.json()
     if (body['status'] = 200) {
         console.log('Successfully Logged In')
-        location.href='view_requests.html'
+        location.href='mechs.html'
     } else if (body['status'] = 403) {
         alert('Invalid Username or Password')
     } else {
