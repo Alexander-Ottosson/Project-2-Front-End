@@ -1,45 +1,72 @@
 let pageUrl = new URL(location.href);
-mechId = pageUrl.searchParams.get("mechId");
+var mechId = pageUrl.searchParams.get("mechId");
 
 var user;
 
-async function loadMech() {
+var mech;
 
+async function loadMech() {
 
     const url = `http://localhost:5000/mech/${mechId}`;
 
     const httpResponse = await fetch(url);
-    const body = await httpResponse.json();
+    mech = await httpResponse.json();
 
-    document.getElementById('modelDisplay').innerHTML = body.model;
+    document.getElementById('modelDisplay').innerHTML = mech.model;
 
-    document.getElementById('makeDisplay').innerHTML = body.make;
+    document.getElementById('makeDisplay').innerHTML = mech.make;
 
-    document.getElementById('yearDisplay').innerHTML = body.year;
+    document.getElementById('yearDisplay').innerHTML = mech.year;
 
-    document.getElementById('colorDisplay').innerHTML = body.color;
+    document.getElementById('colorDisplay').innerHTML = mech.color;
 
-    document.getElementById('speedDisplay').innerHTML = `${body.maxSpeed} km/h`
+    document.getElementById('speedDisplay').innerHTML = `${mech.maxSpeed} km/h`
 
-    document.getElementById('weightDisplay').innerHTML = `${body.weight} kg`
+    document.getElementById('weightDisplay').innerHTML = `${mech.weight} kg`
 
-    document.getElementById('heightDisplay').innerHTML = `${body.height} m`
+    document.getElementById('heightDisplay').innerHTML = `${mech.height} m`
 
-    document.getElementById('descriptionDisplay').innerHTML = body.description
+    document.getElementById('descriptionDisplay').innerHTML = mech.description
 
     const userUrl = 'http://localhost:5000/current_user';
-    const userResponse = await fetch(userUrl);
-    
-    if (userResponse.status = 200) {
-        user = await userResponse.json();
-        console.log(user);
-        document.getElementById('ratingForm').classList.remove('d-none')
-        if (user.isAdmin) {
-            document.getElementById('buttonDisplay').innerHTML = `<a href="edit_mech.html?mechId=${body.id}" class="btn btn-primary">Edit Mech</a>`;
-        }
-    }
+    var userResponse = await fetch(userUrl);
+    user = await userResponse.json();
+    console.log(user);
+    console.log(mech);
+
+    displayButtons();
 
     displayRatings();
+}
+
+async function displayButtons() {
+
+    let buttonDisplay = document.getElementById('buttonDisplay');
+    if (user.id != 0) {
+        if (user.isAdmin) {
+            let editLink = document.createElement('a');
+            editLink.classList.add('btn', 'btn-primary', 'mx-2');
+            editLink.setAttribute('href', `edit_mech.html?mechId=${mechId}`)
+            editLink.innerHTML = 'Edit Mech';
+            buttonDisplay.appendChild(editLink);
+        }
+
+        if (mech.available && user.isPilot) {
+            let checkOutBtn = document.createElement('button');
+            checkOutBtn.classList.add('btn', 'btn-success', 'mx-2');
+            checkOutBtn.addEventListener('click', checkoutMech);
+            checkOutBtn.innerHTML = 'Checkout Mech';
+            buttonDisplay.appendChild(checkOutBtn);
+        }
+
+        if (mech.currentPilot == user.id) {
+            let checkInBtn = document.createElement('button');
+            checkInBtn.classList.add('btn', 'btn-warning', 'mx-2');
+            checkInBtn.addEventListener('click', checkInMech);
+            checkInBtn.innerHTML = 'Check In Mech'
+            buttonDisplay.appendChild(checkInBtn);
+        }
+    }
 }
 
 async function displayRatings() {
@@ -51,6 +78,10 @@ async function displayRatings() {
     ratingElem.innerHTML = '';
 
     console.log(ratingBody);
+
+    if (user.id != 0) {
+        document.getElementById('ratingForm').classList.remove('d-none')
+    }
 
     if (ratingBody.length == 0) {
         let noRatings = document.createElement('p');
@@ -84,6 +115,32 @@ async function displayRatings() {
 
             ratingElem.appendChild(row);
         });
+    }
+}
+
+async function checkoutMech() {
+    console.log('checking out mech...');
+
+    let url = `http://localhost:5000/mech/checkout/${mechId}`;
+    const httpResponse = await fetch(url, {method: 'PATCH'});
+
+    if (httpResponse.status == 200) {
+        location.reload();
+    } else {
+        alert('unable to checkout mech')
+    }
+}
+
+async function checkInMech() {
+    console.log('checking in mech...');
+
+    let url = `http://localhost:5000/mech/checkin/${mechId}`
+    const httpResponse = await fetch(url, {method: 'PATCH'});
+
+    if (httpResponse.status == 200) {
+        location.reload();
+    } else {
+        alert('unable to checkout mech')
     }
 }
 
