@@ -42,7 +42,7 @@ async function loadMech() {
 async function displayButtons() {
 
     let buttonDisplay = document.getElementById('buttonDisplay');
-    if (user.id != 0) {
+    if (user.id) {
         if (user.isAdmin) {
             let editLink = document.createElement('a');
             editLink.classList.add('btn', 'btn-primary', 'mx-2');
@@ -79,7 +79,7 @@ async function displayRatings() {
 
     console.log(ratingBody);
 
-    if (user.id != 0) {
+    if (user.id) {
         document.getElementById('ratingForm').classList.remove('d-none')
     }
 
