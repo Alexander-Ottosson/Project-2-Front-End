@@ -6,7 +6,7 @@
         <title>Mech Management</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     </head>
-    <body onload="setNav()">
+    <body onload="setNav(); loadMechs()">
         <nav id="nav" class="navbar navbar-expand-lg navbar-dark bg-dark bd-gutter px-5">
             <div class="container-fluid">
                 <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false">
@@ -43,7 +43,7 @@
                 <!-- RECENT MECHS SHOULD APPEAR HERE -->
                 <!-- TODO: use bootstrap cards to display the mechs that appear on the home page -->
 
-                <div class="row row-cols-4">
+                <div id="mechDisplay" class="row row-cols-4">
 
                     <!-- Template to show how the mechs will be rendered on the page -->
                     <!-- <div class="col text-center">
@@ -68,5 +68,6 @@
 
     <!-- EXTERNAL SCRIPTS -->
     <script src="js/nav.js"></script>
+    <script src="js/index.js"></script>
 
 </html>
